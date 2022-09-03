@@ -9,7 +9,7 @@ import {
 import { AppState } from "../../core/reducers/reducers";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import UserItem from "../../components/UserItem";
+import UserItem from "../../components/UserItem/userItem";
 import "./dashboard.css";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
@@ -20,7 +20,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { User } from "../../core/model/User";
-import FormModal from "../../components/ModalForm";
+import FormModal from "../../components/ModalForm/modalForm";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -48,14 +48,14 @@ function Dashboard() {
     }
     setDisplayFormModal(false);
   };
-  const handleItemUpdate = (selected: any) => {
+  const handleItemUpdate = (selected: User) => {
     setDisplayFormModal(true);
     setFormState("update");
     //check for selected user and add user id to selected user
     setSelectedUser(selected);
   };
 
-  const handleItemCreate = (user: any) => {
+  const handleItemCreate = () => {
     console.log("create");
     setFormState("create");
     setSelectedUser({} as User);
@@ -74,7 +74,8 @@ function Dashboard() {
     // setDisplayDeleteDialog(true);
   };
 
-  const toggleDeleteDialog = (user: any) => {
+  const toggleDeleteDialog = (userId: number ) => {
+    const user = users.find((user) => user.id === userId) as User;
     setDisplayDeleteDialog(!displayDeleteDialog);
     setSelectedUser(user);
   };
@@ -110,14 +111,14 @@ function Dashboard() {
           ) : error ? (
             <div>Error</div>
           ) : (
-            <Grid
-              m={3}
+           <Grid
+              m={{xs: 0, sm: 3, md: 3}}
               container
-              rowSpacing={4}
-              columnSpacing={4}
+              rowSpacing={{xs: 1, sm: 4, md: 4}}
+              columnSpacing={{xs: 0, sm: 4, md: 5}}
               columns={{ xs: 4, md: 8 }}
             >
-              {users.map((user: any) => (
+              {users.map((user: User) => (
                 <UserItem
                   key={user.id}
                   user={user}
@@ -159,12 +160,14 @@ function Dashboard() {
         </DialogActions>
       </Dialog>
       {/* CREATE USER MODAL */}
+      {displayFormModal ? (
       <FormModal
         selectedUser={selectedUser}
         isOpen={displayFormModal}
         handleClose={handleClose}
         handleSubmit={handleSubmit}
       />
+      ) : null}
     </div>
   );
 }

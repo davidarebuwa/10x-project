@@ -4,12 +4,12 @@
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #e8e9ec;
+  border-bottom: 1px solid gray;
 }
 
 #headerContainer img {
   width: 200px;
-  height: 50px;
+  height: 45px;
 }
 
 #header-left {

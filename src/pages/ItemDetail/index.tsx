@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Button , Avatar} from "@mui/material";
+import { Button , Avatar, Skeleton} from "@mui/material";
 import Typography from '@mui/material/Typography';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
  import "./itemDetail.css";
@@ -39,9 +39,17 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
                     </Typography>  
                     </div>
                     <div className="item-detail-body">
+                        
                         <div className="avatar-container">
+                        {selectedUser.avatar ? (
                             <Avatar alt="Remy Sharp" src={selectedUser.avatar} sx={{ width: 100, height: 100 }}/>
-                        </div>
+                            ) : (
+                            <Skeleton variant="circular" width={100} height={100} />
+                            )}
+                            </div>
+                       
+                           
+                             {selectedUser.first_name && selectedUser.last_name ? (   
                             <Typography component="div" variant="h6" align="center" noWrap sx={{ fontWeight: 'bold', color: 'text.primary' }}>
                                 {selectedUser.first_name} {selectedUser.last_name}
 
@@ -49,9 +57,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
                                 {selectedUser.email} 
                             </Typography>
                             </Typography>
-                      
-                            
-
+                            ) : (
+                            <Skeleton variant="text" width={200} />
+                            )}
 
                     </div>
                 </div>

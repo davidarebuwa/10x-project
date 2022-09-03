@@ -1,38 +1,18 @@
-import React, { useState } from "react";
-import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes, //replaces "Switch" used till v5
-  Route,
-} from "react-router-dom";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "./components/Header";
-import Dashboard from "./pages/Dashboard";
+import { useState, useMemo } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Header from "./components/Header/header";
+import Dashboard from "./pages/Dashboard/dashboard";
 import ItemDetail from "./pages/ItemDetail";
-import ColorModeContext from "./core/utils/ColorModeContext";
+import CssBaseline from "@mui/material/CssBaseline";
+import "./App.css";
 
-function App() {
+const App = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [darkMode, setDarkMode] = useState(true);
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const [darkMode, setDarkMode] = useState(prefersDarkMode);
 
-  const bgStyle = {
-    backgroundColor: darkMode ? "#121212" : "#fff",
-    height: "100%",
-  };
-
-  const colorMode = React.useMemo(
-    () => ({
-      toggleColorMode: () => {
-        console.log("toggleColorMode", mode);
-        setMode(darkMode ? "light" : "dark");
-      },
-    }),
-    [mode, darkMode]
-  );
-
-  const myTheme = React.useMemo(
+  const myTheme = useMemo(
     () =>
       createTheme({
         palette: {
@@ -42,25 +22,30 @@ function App() {
     [darkMode]
   );
 
-  const onClick = () => {
+  const onToggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
   return (
-    <div className="App" style={bgStyle}>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={myTheme}>
-          <Router>
-            <Header onClick={onClick} />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/user/:id" element={<ItemDetail />} />
-            </Routes>
-          </Router>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
+    <div
+      className="App"
+      style={{
+        backgroundColor: darkMode ? "#121212" : "#fff",
+        height: "100%",
+      }}
+    >
+      <CssBaseline />
+      <ThemeProvider theme={myTheme}>
+        <BrowserRouter basename="/ten-x-demo">
+          <Header onToggleDarkMode={onToggleDarkMode} />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/user/:id" element={<ItemDetail />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;

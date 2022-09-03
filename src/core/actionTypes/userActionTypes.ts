@@ -45,7 +45,6 @@ export interface UpdateUserSuccessAction {
   user: User;
 }
 
-
 export const UPDATE_USER_FAILURE = "usersActionTypes/UPDATE_USER_FAILURE";
 export interface UpdateUserFailureAction {
   type: typeof UPDATE_USER_FAILURE;
@@ -70,9 +69,6 @@ export interface DeleteUserFailureAction {
   error: Error | string;
 }
 
-
-
-
 export type UsersListAction =
   | GetUsersListRequestAction
   | GetUsersListSuccessAction
@@ -86,15 +82,11 @@ export type UsersListAction =
   | DeleteUserRequestAction
   | DeleteUserSuccessAction
   | DeleteUserFailureAction;
-  
-  
 
-
-
-  export type User = {
-    id: number;
-    email: string;
-    first_name: string;
-    last_name: string;
-    avatar: string;
-  }
+export type User = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+};

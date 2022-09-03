@@ -2,6 +2,11 @@
   "name": "ten-x-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://davidarebuwa.github.io/ten-x-demo",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && rm -rf docs && mv build docs"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -41,14 +46,6 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "homepage": "https://davidarebuwa.github.io/ten-x-demo",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -76,7 +73,6 @@
     "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.1",
-    "gh-pages": "^4.0.0",
     "typescript": "^4.8.2"
   }
 }
