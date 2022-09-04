@@ -65,5 +65,7 @@ To Visit App:
 `localhost:3000/ten-x-demo`
 
 ## Testing
+Ro run Cypress test using 
+`npx cypress open` 
 
 Provide instructions on how to run application tests. If the tests need to have data seeded, be sure to include information for that too.
