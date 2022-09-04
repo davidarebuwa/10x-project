@@ -8,18 +8,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 interface DeleteDialogProps {
 	isOpen: boolean;
+	handleClose: () => void;
+
 }
 
-const DeleteDialog = ({isOpen} : DeleteDialogProps) => {
+const DeleteDialog = ({isOpen, handleClose} : DeleteDialogProps) => {
 	const [open, setOpen] = useState(false);
 
 	const handleDelete = () => {
 		setOpen(false);
-	}
-
-  	const handleClose = () => {
-		setOpen(false);
-  	};
+	};
 
 	useEffect(() => {
 		setOpen(isOpen);

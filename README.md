@@ -9,8 +9,6 @@
 
 ## Application Description
 
-Provide a short description of your application here.
-
 A web application in React that performs a set of CRUD operations to a list of items (ie, users) using (https://reqres.in/)
 
 ## Table of Contents

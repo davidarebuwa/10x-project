@@ -63,6 +63,7 @@ const FormModal = ({
 }: ModalProps) => {
   const [selected, setSelected] = useState(selectedUser);
   const [displayFormStatus, setDisplayFormStatus] = useState(false);
+  const validImageURL = /https?:\/\/.*\.(?:png|jpg|jpeg)/i;
 
   console.log("FormModal", selectedUser);
 
@@ -121,7 +122,11 @@ const FormModal = ({
                 email: Yup.string().email().required("Enter valid email-id"),
                 first_name: Yup.string().required("Please enter first name"),
                 last_name: Yup.string().required("Please enter last name"),
-                avatar: Yup.string().required("Please enter avatar url"),
+                avatar: Yup.string().matches(
+                    validImageURL,
+                    "Please enter valid image url"
+                )
+                .required("Please enter avatar url"),
               })}
             >
               {(props: FormikProps<IUserForm>) => {

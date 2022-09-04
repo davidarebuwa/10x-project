@@ -141,6 +141,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+      {/* DELETE USER DIALOG */}
       <Dialog
         open={displayDeleteDialog}
         onClose={handleDialogClose}
