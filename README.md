@@ -17,7 +17,6 @@ A web application in React that performs a set of CRUD operations to a list of i
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Testing](#testing)
 
 ## Demo
@@ -65,7 +64,5 @@ To Visit App:
 `localhost:3000/ten-x-demo`
 
 ## Testing
+
 You can run tests by executing `npm run cypress` or `npx cypress open` commands in your prefered CLI which will open the cypress interface, allwoing you to browse existing tests.
-
-
-Provide instructions on how to run application tests. If the tests need to have data seeded, be sure to include information for that too.
