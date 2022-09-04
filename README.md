@@ -66,3 +66,5 @@ To Visit App:
 ## Testing
 
 You can run tests by executing `npm run cypress` or `npx cypress open` commands in your prefered CLI which will open the cypress interface, allwoing you to browse existing tests.
+
+![](https://i.imgur.com/zMlRV69.gif)
