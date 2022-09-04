@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router";
 import { Button, Avatar, Skeleton, ButtonGroup } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { Collapse, Alert, AlertColor } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -24,6 +25,11 @@ interface UserState {
   user: User;
 }
 
+const alert = {
+    severity: ""  ,
+    message: "",
+  };
+
 function ItemDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,6 +43,9 @@ function ItemDetail() {
   const handleDialogOpen = () => setDisplayDeleteDialog(true);
   const handleDialogClose = () => setDisplayDeleteDialog(false);
 
+  const [alertState, setAlertState] = React.useState(alert);
+  const [openAlert, setOpenAlert] = React.useState(false);
+
   //Closes Form Modal
   const handleClose = () => {
     setDisplayFormModal(false);
@@ -48,11 +57,15 @@ function ItemDetail() {
       dispatch(updateUserRequest(selected));
     }
     setDisplayFormModal(false);
+
+    setAlertState({
+        severity: "success",
+        message: "User updated successfully",
+        });
+    setOpenAlert(true);
   };
 
   const handleEdit = () => {
-    console.log("edit");
-    console.log(user);
     setDisplayFormModal(true);
   };
 
@@ -65,12 +78,22 @@ function ItemDetail() {
   };
 
   useEffect(() => {
-    console.log(user);
     setSelectedUser(user);
   }, [location]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setOpenAlert(false);
+    }, 5000);
+  }, [openAlert]);
+
   return (
     <div className="body">
+        <Collapse in={openAlert}>
+        <Alert severity={alertState.severity as AlertColor} >
+          <div>{alertState.message}</div>
+        </Alert>
+      </Collapse>
       <div className="container">
         <div className="back-button-container">
           <Button

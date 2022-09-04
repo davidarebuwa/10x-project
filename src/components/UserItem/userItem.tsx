@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -27,7 +27,6 @@ function UserItem({ user, handleEdit, handleDelete }: UserItemProps) {
   const { id, email, first_name, last_name, avatar } = user;
 
   const goToDetail = (id: number) => {
-    console.log(id);
     //go to detail page and pass selected user
     navigate(`/user/${id}`, {
       state: {
@@ -36,9 +35,7 @@ function UserItem({ user, handleEdit, handleDelete }: UserItemProps) {
     });
   };
 
-  useEffect(() => {
-    console.log("useritem");
-  }, []);
+
 
   return (
     <Grid xs={4} key={id}>

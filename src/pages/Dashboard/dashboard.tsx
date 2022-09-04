@@ -10,6 +10,7 @@ import { AppState } from "../../core/reducers/reducers";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import UserItem from "../../components/UserItem/userItem";
+import { Collapse, Alert, AlertColor } from "@mui/material";
 import "./dashboard.css";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
@@ -22,6 +23,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { User } from "../../core/model/User";
 import FormModal from "../../components/ModalForm/modalForm";
 
+const alert = {
+  severity: ""  ,
+  message: "",
+};
+
+
 function Dashboard() {
   const dispatch = useDispatch();
   const { users, isLoading, error } = useSelector(
@@ -32,6 +39,10 @@ function Dashboard() {
   const [selectedUser, setSelectedUser] = React.useState({} as User);
   const [displayFormModal, setDisplayFormModal] = React.useState(false);
   const [formState, setFormState] = React.useState("");
+  const [alertState, setAlertState] = React.useState(alert);
+
+
+  const [openAlert, setOpenAlert] = React.useState(false);
 
   //Closes Form Modal
   const handleClose = () => {
@@ -47,6 +58,13 @@ function Dashboard() {
       dispatch(updateUserRequest(user));
     }
     setDisplayFormModal(false);
+
+    //set alert
+    setAlertState({
+      severity: "success",
+      message: formState === "create" ? "User successfully created" : "User successfully updated",
+    });
+    setOpenAlert(true);
   };
   const handleItemUpdate = (selected: User) => {
     setDisplayFormModal(true);
@@ -56,20 +74,24 @@ function Dashboard() {
   };
 
   const handleItemCreate = () => {
-    console.log("create");
     setFormState("create");
     setSelectedUser({} as User);
     setDisplayFormModal(true);
   };
 
   const handleDelete = () => {
-    console.log("delete", selectedUser);
     setDisplayDeleteDialog(false);
 
     if (selectedUser) {
       dispatch(deleteUserRequest(selectedUser));
     }
     setSelectedUser({} as User);
+
+    setAlertState({
+      severity: "success",
+      message: "User deleted successfully",
+    });
+    setOpenAlert(true);
 
     // setDisplayDeleteDialog(true);
   };
@@ -81,16 +103,24 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    console.log("testme");
     dispatch(getUsersListRequest());
-    console.log("userListRequest", users);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("Dashboard", users);
+  useEffect(() => {
+    setTimeout(() => {
+      setOpenAlert(false);
+    }, 5000);
+  }, [openAlert]);
+
 
   return (
     <div className="body">
+        <Collapse in={openAlert}>
+        <Alert severity={alertState.severity as AlertColor} >
+          <div>{alertState.message}</div>
+        </Alert>
+      </Collapse>
       <Typography
         component="div"
         variant="h5"

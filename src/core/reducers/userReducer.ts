@@ -64,7 +64,6 @@ export default function usersListReducer(
       return {
         users: state.users.map((user) => {
           if (user.avatar === action.user.avatar) {
-            console.log("UPDATE_USER_SUCCESS found", action.user);
             return {
               ...user,
               ...action.user,

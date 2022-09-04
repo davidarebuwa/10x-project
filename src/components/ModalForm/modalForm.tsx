@@ -65,7 +65,6 @@ const FormModal = ({
   const [displayFormStatus, setDisplayFormStatus] = useState(false);
   const validImageURL = /https?:\/\/.*\.(?:png|jpg|jpeg)/i;
 
-  console.log("FormModal", selectedUser);
 
   const [formStatus, setFormStatus] = useState<IFormStatus>({
     message: "",
