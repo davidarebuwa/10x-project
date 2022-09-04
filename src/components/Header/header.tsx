@@ -22,13 +22,18 @@ const Header = ({ onToggleDarkMode }: HeaderProps) => {
     <div
       id="headerContainer"
       style={{
+        position: "sticky",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 999,
         backgroundColor: theme.palette.background.default,
       }}
     >
       <div id="header-left">
         <img
           src={themedImage(theme.palette.mode)}
-          alt="10x Logo"
+          alt="Logo"
           id="ten-x-logo"
         />
       </div>

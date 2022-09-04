@@ -84,6 +84,7 @@ function Dashboard() {
     console.log("testme");
     dispatch(getUsersListRequest());
     console.log("userListRequest", users);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("Dashboard", users);
@@ -112,11 +113,11 @@ function Dashboard() {
             <div>Error</div>
           ) : (
            <Grid
-              m={{xs: 0, sm: 3, md: 3}}
+              m={{xs: 0, sm: 0, md: 3}}
               container
-              rowSpacing={{xs: 1, sm: 4, md: 4}}
-              columnSpacing={{xs: 0, sm: 4, md: 5}}
-              columns={{ xs: 4, md: 8 }}
+              rowSpacing={{xs: 1, sm: 1, md: 4}}
+              columnSpacing={{xs: 0, sm: 0, md: 5}}
+              columns={{ xs: 4, sm: 4, md: 8 }}
             >
               {users.map((user: User) => (
                 <UserItem
